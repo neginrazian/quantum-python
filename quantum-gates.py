@@ -34,3 +34,23 @@ state2 = apply(X@H,ket_0)
 
 print("--- Z|1⟩ (Pauli-Z on |1⟩) ---")
 state = apply(Z, ket_1)
+
+# Rotation Gates 
+def Rx(theta):
+    """Rotation around X axis by angle theta"""
+    return np.array([[np.cos(theta/2), -1j*np.sin(theta/2)],
+                     [-1j*np.sin(theta/2),np.cos(theta/2)]],dtype=complex)
+
+def Rz(theta):
+    """Rotation around Z axis by angle theta"""
+    return np.array([[np.exp(-1j*theta/2),0],
+                     [0,np.exp(1j*theta/2)]],dtype=complex)
+
+#Test the rotation Gates 
+print("Rx(180°)|0⟩ should equal X|0⟩")
+state_rx=Rx(np.pi)@ket_0
+print(f"  Rx(π)|0⟩ = {state_rx.round(3)}")
+
+print("Rz(180°)|0⟩ should stay at north pole")
+state_rz = Rz(np.pi) @ ket_0
+print(f"  Rz(π)|0⟩ = {state_rz.round(3)}")
